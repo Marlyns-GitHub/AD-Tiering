@@ -97,7 +97,6 @@ else
     {
        Write-Host "[Task 1] : Creating Parent Organizational Unit...                  " -ForegroundColor Green -NoNewline; Write-Host "[Ok]" -ForegroundColor Green
        New-ADOrganizationalUnit -Name $NetBIOSName -Path $DomainName
-       #$ParentOu = "OU=$NetBIOSName,$DomainName"
 
        Write-Host "[Task 2] : Creating Tier0, Tier1 and Tier2 Organizational Units... " -ForegroundColor Green -NoNewline; Write-Host "[Ok]" -ForegroundColor Green
        $OUs | New-ADOrganizationalUnit -Path $ParentOu

@@ -3,8 +3,6 @@ Write-Host "[Task 0] : Gethering Domain Informations, Creating Objects...    " -
 $NetBIOSName = (Get-ADDomain).NetBIOSName
 $DomainName = (Get-ADRootDSE).defaultNamingContext
 $ParentOu = "OU=$NetBIOSName,$DomainName"
-#$ParentOu = (Get-ADOrganizationalUnit -Filter "Name -like '$NetBIOSName'").DistinguishedName
-
 
 $OUs = @(
 
@@ -258,7 +256,6 @@ if (
     }   
 else 
    {
-
         write-warning "This script depends on the script 1) Create Tiering OUs."
         Write-Host ""
         Get-Content .\info.md

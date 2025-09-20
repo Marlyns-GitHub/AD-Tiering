@@ -1,7 +1,6 @@
 ﻿Write-Host ""
 Write-Host "[Task 0] : Gathering Domain Informations, Checking Tiering OUs and GPOs... " -ForegroundColor Green -NoNewline; Write-Host "[OK]" -ForegroundColor Green 
 
-#$RootOU = (Get-ADDomain).NetBIOSName
 $DomainName = (Get-ADRootDSE).defaultNamingContext
 $NetBIOSName = (Get-ADDomain).NetBIOSName
 $ParentOu = "OU=$NetBIOSName,$DomainName"
@@ -23,7 +22,6 @@ $OUs = @(
        $(New-Object PSObject -Property @{Name = "Jump Servers" }),
        $(New-Object PSObject -Property @{Name = "Laptops" }),
        $(New-Object PSObject -Property @{Name = "WorkStations" })
-
 )
 
 $GPOTiering = @(

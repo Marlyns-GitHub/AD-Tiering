@@ -282,7 +282,7 @@ $VersionNumber.versionNumber | ForEach {
                     # Create default T0 Admin for Domain Remote Access
                     Write-Host "[Task : 5] Creating default T0 Admin account...                                                              " -ForegroundColor Green -NoNewline; Write-Host "[OK]" -ForegroundColor Green 
                     
-                    $csvFilePath = ".\users.csv"  # Replace with the actual path to your CSV file
+                    $csvFilePath = ".\users.csv"
                     $dnsroot = '@' + (Get-ADDomain).dnsroot
                     $users = Import-Csv $csvFilePath
 
@@ -412,7 +412,6 @@ $VersionNumber.versionNumber | ForEach {
     else
         {
             Write-Host "[Task : 1] Checking if Version Number doesn't modified, if not configuring User Rights Assignment Tiering.. " -ForegroundColor Green -NoNewline; Write-Host "[OK]" -ForegroundColor Green 
-            #Write-Host "Your DC Policy doesn't been modified, you need to deploy Compliance" -ForegroundColor Green
             function Default_Domain_controllers_policy 
                 {
      
@@ -567,7 +566,7 @@ $VersionNumber.versionNumber | ForEach {
 
                     # Create default T0 Admin for Domain Remote Access
                     Write-Host "[Task : 5] Creating default T0 Admin account...                                                              " -ForegroundColor Green -NoNewline; Write-Host "[OK]" -ForegroundColor Green 
-                    $csvFilePath = ".\users.csv"  # Replace with the actual path to your CSV file
+                    $csvFilePath = ".\users.csv"
                     $dnsroot = '@' + (Get-ADDomain).dnsroot
                     $users = Import-Csv $csvFilePath
 

@@ -236,14 +236,12 @@ function Logon_T0 ()
                     $addURAService = "SeServiceLogonRight = *$($AdminsSid),*$($BackupSid),*$($MainT0Sid),*$($SrvAccountT0Sid)"
                     $addURARemote = "SeRemoteInteractiveLogonRight = *$($AdminT0Sid)"
                     $addURALocally = "SeInteractiveLogonRight = *$($AdminsSid),*$($BackupSid),*$($AdminT0Sid),*$($MainT0Sid),*$($SrvAccountT0Sid)"
-                    #$addURANetwork = "SeNetworkLogonRight = *$($AdminsSid),*$($AdminT0Sid),*$($BackupSid)"
 
                     # Deny section
                     $addURADenyBatch = "SeDenyBatchLogonRight = *$($AdminT1Sid),*$($SrvAccountT1Sid),*$($MainT1Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($RemoteDCT0Sid),*$($AccountSid),*$($PrintSid),*$($ServerSid)"
                     $addURADenyService = "SeDenyServiceLogonRight = *$($AdminT1Sid),*$($SrvAccountT1Sid),*$($MainT1Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($RemoteDCT0Sid),*$($AccountSid),*$($PrintSid),*$($ServerSid)"
                     $addURADenyRemote = "SeDenyRemoteInteractiveLogonRight = *$($AdminT1Sid),*$($SrvAccountT1Sid),*$($MainT1Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($MainT0Sid),*$($RemoteDCT0Sid),*$($SrvAccountT0Sid),*$($AccountSid),*$($PrintSid),*$($ServerSid)"
                     $addURADenyLocally = "SeDenyInteractiveLogonRight = *$($AdminT1Sid),*$($SrvAccountT1Sid),*$($MainT1Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($RemoteDCT0Sid),*$($AccountSid),*$($PrintSid),*$($ServerSid)"
-                    #$addURADenyNetwork = "SeDenyNetworkLogonRight = *$($AdminT1Sid),*$($SrvAccountT1Sid),*$($MainT1Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($MainT0Sid),*$($RemoteDCT0Sid),*$($SrvAccountT0Sid),*$($AccountSid),*$($PrintSid),*$($ServerSid)" 
 
                     # Edit GptTmpl.inf
                     Add-Content -Path $gptFile0 -Value '[Privilege Rights]'
@@ -251,12 +249,10 @@ function Logon_T0 ()
                     Add-Content -Path $gptFile0 -Value $addURAService 
                     Add-Content -Path $gptFile0 -Value $addURARemote
                     Add-Content -Path $gptFile0 -Value $addURALocally
-                    #Add-Content -Path $gptFile0 -Value $addURANetwork
                     Add-Content -Path $gptFile0 -Value $addURADenyBatch
                     Add-Content -Path $gptFile0 -Value $addURADenyService
                     Add-Content -Path $gptFile0 -Value $addURADenyRemote
                     Add-Content -Path $gptFile0 -Value $addURADenyLocally
-                    #Add-Content -Path $gptFile0 -Value $addURADenyNetwork
 
                     $getGPOT0 = (Get-ADObject "CN={$($000Id)},$PathPolicy").DistinguishedName  
                     Set-ADObject -Identity $getGPOT0 -Replace @{gPCMachineExtensionNames="[$pPCMachineExtensionNames]"} 
@@ -298,14 +294,12 @@ function Logon_T1 ()
                     $addURAService = "SeServiceLogonRight = *$($AdminsSid),*$($BackupSid),*$($MainT1Sid),*$($SrvAccountT1Sid)"
                     $addURARemote = "SeRemoteInteractiveLogonRight = *$($AdminT1Sid),*$($UserRemoteT2Sid)"
                     $addURALocally = "SeInteractiveLogonRight = *$($AdminsSid),*$($BackupSid),*$($AdminT1Sid),*$($MainT1Sid),*$($SrvAccountT1Sid)"
-                    #$addURANetwork = "SeNetworkLogonRight = *$($AdminsSid),*$($AuthUserSid),*$($AdminT1Sid),*$($BackupSid)"
 
                     # Deny section
                     $addURADenyBatch = "SeDenyBatchLogonRight = *$($AdminT0Sid),*$($SrvAccountT0Sid),*$($MainT0Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($RemoteDCT0Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid)"
                     $addURADenyService = "SeDenyServiceLogonRight = *$($AdminT0Sid),*$($SrvAccountT0Sid),*$($MainT0Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($RemoteDCT0Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid)"
                     $addURADenyRemote = "SeDenyRemoteInteractiveLogonRight = *$($AdminsSid),*$($AdminT0Sid),*$($SrvAccountT0Sid),*$($MainT0Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($RemoteDCT0Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($MainT1Sid),*$($SrvAccountT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid)"
                     $addURADenyLocally = "SeDenyInteractiveLogonRight = *$($AdminT0Sid),*$($SrvAccountT0Sid),*$($MainT0Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($RemoteDCT0Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid)"
-                    #$addURADenyNetwork = "SeDenyNetworkLogonRight = *$($AdminsSid),*$($AdminT0Sid),*$($SrvAccountT0Sid),*$($MainT0Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($RemoteDCT0Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($MainT1Sid),*$($SrvAccountT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid)"
 
                     # Edit GptTmpl.inf
                     Add-Content -Path $gptFile1 -Value '[Privilege Rights]'
@@ -313,12 +307,10 @@ function Logon_T1 ()
                     Add-Content -Path $gptFile1 -Value $addURAService 
                     Add-Content -Path $gptFile1 -Value $addURARemote
                     Add-Content -Path $gptFile1 -Value $addURALocally
-                    #Add-Content -Path $gptFile1 -Value $addURANetwork
                     Add-Content -Path $gptFile1 -Value $addURADenyBatch
                     Add-Content -Path $gptFile1 -Value $addURADenyService
                     Add-Content -Path $gptFile1 -Value $addURADenyRemote
                     Add-Content -Path $gptFile1 -Value $addURADenyLocally
-                    #Add-Content -Path $gptFile1 -Value $addURADenyNetwork
 
                     $getGPOT1 = (Get-ADObject "CN={$($001Id)},$PathPolicy").DistinguishedName
                     Set-ADObject -Identity $getGPOT1 -Replace @{gPCMachineExtensionNames="[$pPCMachineExtensionNames]"}
@@ -412,7 +404,6 @@ function Logon_PAW_T0 ()
                     $addURADenyService = "SeDenyServiceLogonRight = *$($AdminT0Sid),*$($MainT0Sid),*$($RemoteDCT0Sid),*$($AdminT1Sid),*$($SrvAccountT1Sid),*$($MainT1Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid),*$($BackupSid)"
                     $addURADenyRemote = "SeDenyRemoteInteractiveLogonRight = *$($AdminsSid),*$($AdminT0Sid),*$($RemoteDCT0Sid),*$($SrvAccountT0Sid),*$($PAWMainT0Sid),*$($MainT0Sid),*$($AdminT1Sid),*$($SrvAccountT1Sid),*$($MainT1Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid),*$($BackupSid)"
                     $addURADenyLocally = "SeDenyInteractiveLogonRight = *$($AdminT0Sid),*$($RemoteDCT0Sid),*$($MainT0Sid),*$($AdminT1Sid),*$($SrvAccountT1Sid),*$($MainT1Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid),*$($BackupSid)"
-                    #$addURADenyNetwork = "SeDenyNetworkLogonRight = *$($AdminsSid),*$($AdminT0Sid),*$($RemoteDCT0Sid),*$($SrvAccountT0Sid),*$($PAWMainT0Sid),*$($MainT0Sid),*$($AdminT1Sid),*$($SrvAccountT1Sid),*$($MainT1Sid),*$($JumpMainT1Sid),*$($JumpUserT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid),*$($BackupSid)"
 
                     # Edit GptTmpl.inf
                     Add-Content -Path $gptFile3 -Value '[Privilege Rights]'
@@ -424,7 +415,6 @@ function Logon_PAW_T0 ()
                     Add-Content -Path $gptFile3 -Value $addURADenyService
                     Add-Content -Path $gptFile3 -Value $addURADenyRemote
                     Add-Content -Path $gptFile3 -Value $addURADenyLocally
-                    #Add-Content -Path $gptFile3 -Value $addURADenyNetwork
 
                     $getGPOT3 = (Get-ADObject "CN={$($003Id)},$PathPolicy").DistinguishedName
                     Set-ADObject -Identity $getGPOT3 -Replace @{gPCMachineExtensionNames="[$pPCMachineExtensionNames]"}
@@ -473,7 +463,6 @@ function Logon_JumpServer_T2 ()
                     $addURADenyService = "SeDenyServiceLogonRight = *$($AdminT0Sid),*$($SrvAccountT0Sid),*$($MainT0Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($RemoteDCT0Sid),*$($AdminT1Sid),*$($MainT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid),*$($BackupSid)"
                     $addURADenyRemote = "SeDenyRemoteInteractiveLogonRight = *$($AdminsSid),*$($AdminT0Sid),*$($SrvAccountT0Sid),*$($MainT0Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($RemoteDCT0Sid),*$($AdminT1Sid),*$($SrvAccountT1Sid),*$($MainT1Sid),*$($JumpMainT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid),*$($BackupSid)"
                     $addURADenyLocally = "SeDenyInteractiveLogonRight = *$($AdminT0Sid),*$($SrvAccountT0Sid),*$($MainT0Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($RemoteDCT0Sid),*$($AdminT1Sid),*$($MainT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid),*$($BackupSid)"
-                    #$addURADenyNetwork = "SeDenyNetworkLogonRight = *$($AdminsSid),*$($AdminT0Sid),*$($SrvAccountT0Sid),*$($MainT0Sid),*$($PAWUserT0Sid),*$($PAWMainT0Sid),*$($RemoteDCT0Sid),*$($AdminT1Sid),*$($SrvAccountT1Sid),*$($MainT1Sid),*$($JumpMainT1Sid),*$($AdminT2Sid),*$($UsersT2Sid),*$($HelpdeskT2Sid),*$($UserRemoteT2Sid),*$($DASid),*$($EASid),*$($SchemaSid),*$($AccountSid),*$($PrintSid),*$($ServerSid),*$($BackupSid)"
 
                     # Edit GptTmpl.inf
                     Add-Content -Path $gptFile4 -Value '[Privilege Rights]'
@@ -485,7 +474,6 @@ function Logon_JumpServer_T2 ()
                     Add-Content -Path $gptFile4 -Value $addURADenyService
                     Add-Content -Path $gptFile4 -Value $addURADenyRemote
                     Add-Content -Path $gptFile4 -Value $addURADenyLocally
-                    #Add-Content -Path $gptFile4 -Value $addURADenyNetwork
 
                     $getGPOT4 = (Get-ADObject "CN={$($004Id)},$PathPolicy").DistinguishedName
                     Set-ADObject -Identity $getGPOT4 -Replace @{gPCMachineExtensionNames="[$pPCMachineExtensionNames]"}
