@@ -5,13 +5,13 @@ The purpose of this script is to simplify the implementation of the Tiering mode
 
 Tiering model standard consists of three tiers, tiers 0, 1, and 2. they are classified according to the level of trust.
 
-Tier 0 : it has a high level of trust, it includes the critical servers like (AD, Microsoft Entra Connect, ADFS, KPI and others Tier 0 dependencies).             
-Tier 1 : it has a medium level of trust, it includes the business applications servers like (BDD, SAP, Web, Fileservers and others Tier 1 dependencies ).         
-Tier 2 : it has a low level of trust, it includes the End Users devices like (Workstations, Laptops, Printers, etc).
+Tier 0 : it has a high level of trust, it includes critical servers like (AD, Microsoft Entra Connect, ADFS, KPI and others Tier 0 dependencies).                 
+Tier 1 : it has a medium level of trust, it includes business applications servers like (BDD, SAP, Web, Fileservers and others Tier 1 dependencies ).             
+Tier 2 : it has a low level of trust, it includes End Users devices like (Workstations, Laptops, Printers, etc).                                                  
 
-The Tier 0 Admins : can only log on the Tier 0 resources and cannot log to the other tiers.                                                                       
-The Tier 1 Admins : can only log on the Tier 1 resources and cannot log to the other tiers.                                                                       
-The Tier 2 Admins : can only log on the Tier 2 resources and cannot log to the other tiers.                                                                       
+Tier 0 Admins : can only log on the Tier 0 resources and cannot log to the other tiers.                                                                           
+Tier 1 Admins : can only log on the Tier 1 resources and cannot log to the other tiers.                                                                           
+Tier 2 Admins : can only log on the Tier 2 resources and cannot log to the other tiers.                                                                           
 
 1. Organizational Units
 
@@ -99,7 +99,7 @@ AD-Tiering contains:
 - 00_OU_Tiering.ps1
 - 01_Groups_Tiering.ps1
 - 02_GPO_Tiering.ps1
-- 03_UserRightAssignment_Tiering.ps1
+- 03_UserRightAssignment_DC_Tiering.ps1
 - 04_RestrictedLogon_Tiering.ps1
 - MENU_Tiering.ps1
 
@@ -107,5 +107,5 @@ Note : During the implementation, a Tier 0 user account will be created for the 
 
 Conclusion
 
-The idea is to make simpler Active Directory Tiering deployment, we know that the tiering has been removed form generales recommandations per Microsoft.
-Because it's complex to implement, but there remain the best practices to reduce attack surface in Active Directory and prevent lateral movement between the tiers. Active Directory security is complex and it should not be limited with the tiering model.
+The idea is to make simpler Active Directory Tiering implementation, we know that the tiering has been removed form generales recommandations per Microsoft.
+Because it's complex to implement, but there remain the best practices to reduce attack surface in Active Directory and prevent lateral movement between the tiers. Active Directory security is important and it should not be limited with the tiering model.
