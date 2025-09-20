@@ -4,5 +4,5 @@
             / ___ \| |_| |   | | | |  __/ |  | | | | | (_| |
            /_/   \_\____/    |_| |_|\___|_|  |_|_| |_|\__, |          
                                                       |___/           
-     Automate Active Directory Tiered Model Standard Three Tiers
-________________By Marlyns NKUNGA, Sept. 2025, V1.0.0__________________
+Automate the three tiers Active Directory Tiered Model, Version : v1.0.0         
+_____________________By Marlyns NKUNGA, Sept. 2025______________________
