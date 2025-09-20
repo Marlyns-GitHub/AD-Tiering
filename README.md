@@ -15,85 +15,95 @@ The Tier 2 Admins : can only log on the Tier 2 resources and cannot log to the o
 
 1. Organizational Units
 
-We know that the simplicify is the key to the design, Organizational Unit (OU) it's a logical design inside the active directory.
-Most policy and security configurations can be applied through a more useful set of filters than the OU.
+We know that simplicity is the key to design, Organizational Units (OU) allow us to design a tiering model inside of the active directory.
+Many organizational units will be created, ParentOu : this is a main OU that will contain all Tiers of OU, the parent OU will be your NetBIOSName domain name.
 
-This script create an OU logical design as follow :
-ParentOu : it's a principal OU will contains all OUs Tier, Parent OU will name your domain name.
-
-ParentOu
-ParentOu,Tier0
-ParentOu,Tier1 
-ParentOu,Tier2
-ParentOu,Tier0,Admins
-ParentOu,Tier0,Groups
-ParentOu,Tier0,Service Accounts
-ParentOu,Tier0,Servers
-ParentOu,Tier0,PAW
-ParentOu,Tier0,PAW Users
-ParentOu,Tier1,Admins
-ParentOu,Tier1,Groups
-ParentOu,Tier1,Service Accounts
-ParentOu,Tier1,Servers
-ParentOu,Tier1,Jump Servers
-ParentOu,Tier1,JumpServer Users
-ParentOu,Tier2,Admins
-ParentOu,Tier2,Groups
-ParentOu,Tier2,WorkStation
-ParentOu,Tier2,Laptops
-ParentOu,Tier2,Users
+- ParentOu                                                                                                                                                        
+- ParentOu,Tier0                                                                                                                                                  
+- ParentOu,Tier1                                                                                                                                                  
+- ParentOu,Tier2                                                                                                                                                  
+- ParentOu,Tier0,Admins                                                                                                                                           
+- ParentOu,Tier0,Groups                                                                                                                                           
+- ParentOu,Tier0,Service Accounts                                                                                                                                 
+- ParentOu,Tier0,Servers                                                                                                                                          
+- ParentOu,Tier0,PAW                                                                                                                                              
+- ParentOu,Tier0,PAW Users                                                                                                                                        
+- ParentOu,Tier1,Admins                                                                                                                                           
+- ParentOu,Tier1,Groups                                                                                                                                           
+- ParentOu,Tier1,Service Accounts                                                                                                                                 
+- ParentOu,Tier1,Servers                                                                                                                                          
+- ParentOu,Tier1,Jump Servers                                                                                                                                     
+- ParentOu,Tier1,JumpServer Users                                                                                                                                 
+- ParentOu,Tier2,Admins                                                                                                                                           
+- ParentOu,Tier2,Groups                                                                                                                                           
+- ParentOu,Tier2,WorkStation                                                                                                                                      
+- ParentOu,Tier2,Laptops                                                                                                                                          
+- ParentOu,Tier2,Users                                                                                                                                           
 
 2. Tiering Security Groups
 
-We know that it exists most default security groups into Active Directory, these groups have excess privilege. 
-The default security groups are :
+We know that there are many default security groups in Active Directory, these groups have excessive privileges. 
+The default security groups are:
 
-- Administrators
-- Domain Admins
-- Schema Admins
-- Enterprise Admins
-- Account Operators
-- Server Operators
-- Print Operators
-- Backoup Operators
-- Etc
+- Administrators                                                                                                                                                  
+- Domain Admins                                                                                                                                                   
+- Schema Admins                                                                                                                                                   
+- Enterprise Admins                                                                                                                                               
+- Account Operators                                                                                                                                               
+- Server Operators                                                                                                                                                
+- Print Operators                                                                                                                                                 
+- Backoup Operators                                                                                                                                               
+- Etc                                                                                                                                                             
 
-We wish to change or revoke some privileges on the default security groups and we'll use tiering security groups.
-The tiering security groups :
+We want to change or revoke some privileges on the default security groups and we will use the tiering security groups.
+The tiering security groups are:
 
-- Domain Tier0 Admins                    : Designated for Tier0 admins
-- Domain Tier0 Service Accounts          : Designated for Tier0 Service Account
-- Domain Tier0 PAW Users                 : Designated for Tier0 PAW Users
-- Domain Tier0 PAW Maintenance           : Designated for Tier0 PAW Maintenance
-- Domain Tier0 Maintenance               : Designated for Tier0 Maintenance
-- Domain Tier0 Remote Domain Controllers : Designated for Tier0 Remote Domain Controllers
-- Domain Tier1 Admins                    : Designated for Tier1 admins
-- Domain Tier1 Service Accounts          : Designated for Tier1 service Accounts
-- Domain Tier1 JumpServer Users          : Designated for Tier1 JumpServer Users
-- Domain Tier1 Jumpserver Maintenance    : Designated for Tier1 JumpServer Maintenance
-- Domain Tier1 Maintenance               : Designated for Tier1 Maintenance 
-- Domain Tier2 Admins                    : Designated for Tier2 Admins
-- Domain Tier2 HelpDesk Operators        : Designated for Tier2 Hepldesk Operators
-- Domain Tier2 Remote Desktop Users      : Designated for Tier2 Remote Desktop Users
-- Domain Tier2 Users                     : Designated for Tier2 Users
+- Domain Tier0 Admins                    : Designated for Tier0 admins                                                                                            
+- Domain Tier0 Service Accounts          : Designated for Tier0 Service Account                                                                                   
+- Domain Tier0 PAW Users                 : Designated for Tier0 PAW Users                                                                                         
+- Domain Tier0 PAW Maintenance           : Designated for Tier0 PAW Maintenance                                                                                   
+- Domain Tier0 Maintenance               : Designated for Tier0 Maintenance                                                                                       
+- Domain Tier0 Remote Domain Controllers : Designated for Tier0 Remote Domain Controllers                                                                         
+- Domain Tier1 Admins                    : Designated for Tier1 admins                                                                                            
+- Domain Tier1 Service Accounts          : Designated for Tier1 service Accounts                                                                                  
+- Domain Tier1 JumpServer Users          : Designated for Tier1 JumpServer Users                                                                                  
+- Domain Tier1 Jumpserver Maintenance    : Designated for Tier1 JumpServer Maintenance                                                                            
+- Domain Tier1 Maintenance               : Designated for Tier1 Maintenance                                                                                       
+- Domain Tier2 Admins                    : Designated for Tier2 Admins                                                                                            
+- Domain Tier2 HelpDesk Operators        : Designated for Tier2 Hepldesk Operators                                                                                
+- Domain Tier2 Remote Desktop Users      : Designated for Tier2 Remote Desktop Users                                                                              
+- Domain Tier2 Users                     : Designated for Tier2 Users                                                                                             
 
 3. Restricted Logon
 
-Restricted Logon is the most important step when we deploy the tiering model, Here we configure how can to log on interactive and remote mode.
-It's possible with those group policies below :
+The restricted Logon is the most important step when we deploy the tiering model. Here we configure the authentication policies. allow or deny the log on.
+It's faisable with the group policies below:
 
-- Access this computer from the network 
-- Allow log on locally
-- Allow log on through Remote Desktop service
-- Allow log on a batch
-- Allow log on a service
+- Access this computer from the network                                                                                                                           
+- Allow log on locally                                                                                                                                            
+- Allow log on through Remote Desktop service                                                                                                                     
+- Allow log on a batch                                                                                                                                            
+- Allow log on a service                                                                                                                                          
+                                                                                                                                                                
+- Deny Access this computer from the network                                                                                                                      
+- Deny Allow log on locally                                                                                                                                       
+- Deny Allow log on through Remote Desktop service                                                                                                                
+- Deny Allow log on a batch                                                                                                                                       
+- Deny Allow log on a service                                                                                                                                     
 
-- Deny Access this computer from the network 
-- Deny Allow log on locally
-- Deny Allow log on through Remote Desktop service
-- Deny Allow log on a batch
-- Deny Allow log on a service
+4. Use
 
+AD-Tiering is a set of many powershell scripts centralized in one interface, taht makes it easy to use.
+AD-Tiering contains:
+
+- 00_OU_Tiering.ps1
+- 01_Groups_Tiering.ps1
+- 02_GPO_Tiering.ps1
+- 03_UserRightAssignment_Tiering.ps1
+- 04_RestrictedLogon_Tiering.ps1
+- MENU_Tiering.ps1
+
+Note : During the implementation, a Tier 0 user account will be created for the first connection when the server restarts, you must change the default password for security reasons.
 
 Conclusion
 
