@@ -5,8 +5,8 @@ The purpose of this script is to simplify the implementation of the Tiering mode
 
 Tiering model standard consists of three tiers, tiers 0, 1, and 2. they are classified according to the level of trust.
 
-Tier 0 : it has a high level of trust, it includes the critical servers like (AD, Microsoft Entra Connect, ADFS, KPI and others Tier 0 dependencies).
-Tier 1 : it has a medium level of trust, it includes the business applications servers like (BDD, SAP, Web, Fileservers and others Tier 1 dependencies ).
+Tier 0 : it has a high level of trust, it includes the critical servers like (AD, Microsoft Entra Connect, ADFS, KPI and others Tier 0 dependencies).             
+Tier 1 : it has a medium level of trust, it includes the business applications servers like (BDD, SAP, Web, Fileservers and others Tier 1 dependencies ).         
 Tier 2 : it has a low level of trust, it includes the End Users devices like (Workstations, Laptops, Printers, etc).
 
 The Tier 0 Admins : can only log on the Tier 0 resources and cannot log to the other tiers.                                                                       
