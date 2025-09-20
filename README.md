@@ -1,11 +1,48 @@
 # AD-Tiering : Automating Active Directory Tiering
 Overview
 
-The purpose of this script is to simplify Tiering model implementation.
+The purpose of this script is to simplify the implementation of the Tiering model. The tiering model is an approach to segment the authentication secret in Active Directory environments. The principle is to create a separation between administrators based on the resources they manage. This helps to protect authentication secrets and avoid a compromise from the low level of trust to spread to the high level of trust.
 
-Tiering model standard consists of three tiers, tiers 0, 1, and 2.
+Tiering model standard consists of three tiers, tiers 0, 1, and 2. they are classified according to the level of trust
+
+Tier 0 : it has a high level of trust, it includes the critical servers like (Active Directory, Microsoft Entra Connect, ADFS, KPI and others Tier 0 dependencies)
+Tier 1 : it has a medium level of trust, it includes the business applications servers like (BDD, SAP, Web, Fileservers and others Tier 1 dependencies ).
+Tier 2 : it has a low level of trust, it includes the End Users devices like (Workstations, Laptops, Printers, etc).
+
+The Tier 0 Admins : can only log on the Tier 0 resources and cannot log to the other tiers
+The Tier 1 Admins : can only log on the Tier 1 resources and cannot log to the other tiers
+The Tier 2 Admins : can only log on the Tier 2 resources and cannot log to the other tiers
 
 1. Organizational Units
+
+We know that the simplicify is the key to the design, Organizational Unit (OU) it's a logical design inside the active directory.
+Most policy and security configurations can be applied through a more useful set of filters than the OU.
+
+This script create an OU logical design as follow :
+ParentOu : it's a principal OU will contains all OUs Tier, Parent OU will name your domain name.
+
+ParentOu
+ParentOu,Tier0
+ParentOu,Tier1 
+ParentOu,Tier2
+ParentOu,Tier0,Admins
+ParentOu,Tier0,Groups
+ParentOu,Tier0,Service Accounts
+ParentOu,Tier0,Servers
+ParentOu,Tier0,PAW
+ParentOu,Tier0,PAW Users
+ParentOu,Tier1,Admins
+ParentOu,Tier1,Groups
+ParentOu,Tier1,Service Accounts
+ParentOu,Tier1,Servers
+ParentOu,Tier1,Jump Servers
+ParentOu,Tier1,JumpServer Users
+ParentOu,Tier2,Admins
+ParentOu,Tier2,Groups
+ParentOu,Tier2,WorkStation
+ParentOu,Tier2,Laptops
+ParentOu,Tier2,Users
+
 2. Tiering Security Groups
 
 We know that it exists most default security groups into Active Directory, these groups have excess privilege. 
@@ -21,7 +58,7 @@ The default security groups are :
 - Backoup Operators
 - Etc
 
-We wish to change and revoke some privileges on the default security groups and we'll use tiering security groups.
+We wish to change or revoke some privileges on the default security groups and we'll use tiering security groups.
 The tiering security groups :
 
 - Domain Tier0 Admins                    : Designated for Tier0 admins
@@ -60,6 +97,5 @@ It's possible with those group policies below :
 
 Conclusion
 
-The idea is to make simpler Active Directory Tiering deployment, we know that the tiering is not recommanded per Microsoft.
-But it still the best practices to reduce surface attack into Active Directory and prevent lateral movement between the tiers.
-Active Directory security is complex and don't limit with tiering model.
+The idea is to make simpler Active Directory Tiering deployment, we know that the tiering has been removed form generales recommandations per Microsoft.
+Because it's complex to implement, but there remain the best practices to reduce attack surface in Active Directory and prevent lateral movement between the tiers. Active Directory security is complex and it should not be limited with the tiering model.
