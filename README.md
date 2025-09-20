@@ -3,9 +3,9 @@ Overview
 
 The purpose of this script is to simplify the implementation of the Tiering model. The tiering model is an approach to segment the authentication secret in Active Directory environments. The principle is to create a separation between administrators based on the resources they manage. This helps to protect authentication secrets and avoid a compromise from the low level of trust to spread to the high level of trust.
 
-Tiering model standard consists of three tiers, tiers 0, 1, and 2. they are classified according to the level of trust
+Tiering model standard consists of three tiers, tiers 0, 1, and 2. they are classified according to the level of trust.
 
-Tier 0 : it has a high level of trust, it includes the critical servers like (Active Directory, Microsoft Entra Connect, ADFS, KPI and others Tier 0 dependencies)
+Tier 0 : it has a high level of trust, it includes the critical servers like (Active Directory, Microsoft Entra Connect, ADFS, KPI and others Tier 0 dependencies).
 Tier 1 : it has a medium level of trust, it includes the business applications servers like (BDD, SAP, Web, Fileservers and others Tier 1 dependencies ).
 Tier 2 : it has a low level of trust, it includes the End Users devices like (Workstations, Laptops, Printers, etc).
 
