@@ -103,9 +103,9 @@ AD-Tiering contains:
 - 04_RestrictedLogon_Tiering.ps1
 - MENU_Tiering.ps1
 
-Note : During the implementation, a Tier 0 user account will be created for the first connection when the server restarts, you must change the default password for security reasons.
+Note : During the implementation, a Tier 0 user account will be created for the first connection when the server restarts, you must change the default password for security reasons. username : t0admin and password : Ti3r1ng&%!147741
 
 Conclusion
 
 The idea is to make simpler Active Directory Tiering implementation, we know that the tiering has been removed form generales recommandations per Microsoft.
-Because it's complex to implement, but there remain the best practices to reduce attack surface in Active Directory and prevent lateral movement between the tiers. Active Directory security is important and it should not be limited with the tiering model.
+Because it's complex to implement, but there remain the best practices to reduce attack surface in Active Directory and prevent lateral movement between the tiers. Active Directory security is very important and it should not be limited with the tiering model.
