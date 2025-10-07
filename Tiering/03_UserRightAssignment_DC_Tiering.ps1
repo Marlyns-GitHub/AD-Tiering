@@ -9,6 +9,9 @@ $FQDNDomainName = (Get-ADDomain).DnsRoot
 $DomainSid = (Get-ADDomain).DomainSID.Value
 $DomainName = (Get-ADRootDSE).defaultNamingContext
 $ParentOu = "OU=$NetBIOSName,$DomainName"
+$DistinguishedDomainName = (Get-ADDomain).DistinguishedName
+$MachineAccountValue = "ms-DS-MachineAccountQuota"
+$MachineAccountQuota = (Get-ADObject -Identity $DistinguishedDomainName -Properties ms-DS-MachineAccountQuota | Select-Object ms-DS-MachineAccountQuota ).$MachineAccountValue
 
 $groupT0 = @(
                 $(New-Object PSObject -Property @{Group = "Domain Tier0 Admins"; OUPrefix = "OU=Groups,OU=Tier0,$ParentOu" }),
@@ -68,6 +71,7 @@ foreach ( $GPO in $DefaultGPO ){
        $PathDomainCtrlPolicy = Get-Item "\\$Hostname\Sysvol\$Domain\Policies\{$($001Id)}\Machine\Microsoft\Windows NT\SecEdit"
        $GptTmplPath = "$PathDomainCtrlPolicy\GptTmpl.inf"
        $GptIniPath = "\\$Hostname\Sysvol\$Domain\Policies\{$($001Id)}\GPT.INI"
+       $CheckContent = Get-Content $GptTmplPath
     }
 }
 
@@ -367,7 +371,7 @@ $VersionNumber.versionNumber | ForEach {
         }
         
 
-    elseif ( $VersionNumber.versionNumber -eq $ResultVNumber )            
+    elseif ( $MachineAccountQuota -eq "0" )            
         {
               Write-Host "[Task : 1] User Rights Assignment Tiering already configured.                                                " -ForegroundColor Green -NoNewline; Write-Host "[Ok]" -ForegroundColor Green
 
@@ -383,7 +387,6 @@ $VersionNumber.versionNumber | ForEach {
                          "SeDenyRemoteInteractiveLogonRight"
                          
               #Write-Host "User Right Assignment Compliance has deployied" -ForegroundColor Green
-              $CheckContent = Get-Content $GptTmplPath
               $Content = $CheckContent | Select-String $Pattern
 
               Write-Host "" 
@@ -400,7 +403,7 @@ $VersionNumber.versionNumber | ForEach {
               Write-Host "Log on as a batch job                         : " -ForegroundColor DarkGray -NoNewline; Write-Host $BackupName, $AdminsName, $groupT0.Group[0] -ForegroundColor DarkGray
               Write-Host "Log on locally                                : " -ForegroundColor DarkGray -NoNewline; Write-Host $BackupName, $AdminsName, $groupT0.Group[0] -ForegroundColor DarkGray 
               Write-Host "Add workstations to domain                    : " -ForegroundColor DarkGray -NoNewline; Write-Host $groupT2.Group[1], $DAName -ForegroundColor DarkGray
-              Write-Host "Access this computer from the network         : " -ForegroundColor DarkGray -NoNewline; Write-Host $EnterpriseDCName, $AdminsName, $groupT0.Group[0] -ForegroundColor DarkGray
+              Write-Host "Access this computer from the network         : " -ForegroundColor DarkGray -NoNewline; Write-Host $EnterpriseDCName, $AdminsName, $AuthUserName -ForegroundColor DarkGray
               Write-Host "Log on through Remote Desktop Services        : " -ForegroundColor DarkGray -NoNewline; Write-Host $groupT0.Group[0] -ForegroundColor DarkGray
               Write-Host "Attribute ms-DS-MachineAccountQuota is set to : " -ForegroundColor DarkGray -NoNewline; Write-Host "0" -ForegroundColor DarkGray                         
               Write-Host ""
